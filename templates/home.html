@@ -26,14 +26,7 @@
         </script>
 
     <!-- Top Bar -->
-    <div>
-        <button type="button" style="border: none;
-                                background-color: inherit;
-                                padding: 16px 48px;
-                                font-size: 48px;
-                                display: inline-block;
-        ">nischay.</button>
-    </div>
+    {% include 'navbar.html' %}
 
     <!-- Hero Section -->
     <div>
@@ -54,8 +47,9 @@
     </div>
 
     <!-- Main Content -->
-    <div style="padding-left: 250px; padding-right: 250px; margin-top: 200px; margin-bottom: 100px;">
-        <div class="container-fluid px-2 pt-2 rounded-3 border" style="background-color: #d6d6d6;
+    <div style="padding-left: 12%; padding-right: 12%; margin-top: 200px; margin-bottom: 100px;">
+        <div class="container-fluid px-2 pt-2 rounded-3 border" 
+            style="background-color: #d6d6d671;
                 font-size: 24px;
                 padding-bottom: 10px;
                 border: 1;
@@ -175,6 +169,7 @@
         </div>
     </div>
     <!-- <img style="width:10%;" class="bg-info rounded-circle" src="/static/nischay.jpeg"> -->
+    {% include 'footer.html' %}
 </body>
 
 </html>
