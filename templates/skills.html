@@ -1,0 +1,26 @@
+<!-- FILEPATH: /media/nischay/Storage/Programming/portfolio-website/templates/skills.html -->
+<!-- BEGIN: abpxx6d04wxr -->
+<div style="padding-left: 64px; padding-right: 32px;"">
+    <div style=" display: flex;">
+    <h2 style="font-weight: bold;">Skills</h2>
+    <hr style="border-top: 2px solid #bf3131bf; width: 90%; align-items: center; margin: auto;;">
+</div>
+<ul>
+    {% for skill in skills %}
+        <div style="display: inline-block;
+        padding: 0 25px;
+        height: 50px;
+        font-size: 20px;
+        line-height: 50px;
+        margin: 4px;
+        color: #ffffff;
+        font-weight: bold;
+        border-radius: 25px;
+        background-color: #ff0000d0;">
+            {{skill}}
+          </div>
+    {% endfor %}
+</ul>
+<div style="clear: both;"></div>
+</div>
+<!-- END: abpxx6d04wxr -->

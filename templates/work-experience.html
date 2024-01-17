@@ -1,20 +1,35 @@
-<div style="padding-left: 64px; padding-right: 32px;">
-    <h3>Work Experience</h3>
+<div style="padding-left: 64px; padding-right: 32px; ">
+    <div style="display: flex;">
+        <h2 style="font-weight: bold;">Work Experience</h2>
+        <hr style="border-top: 2px solid #bf3131bf; width: 80%;align-items: center; margin: auto;;">
+    </div>
     <div>
-        {% for experience in work_experience %}
-        <div>
-            <h1>{{experience['title']}}</h1>
-            <div style="display: inline; inline-size: auto">
-                <p>{{experience['company']}}</p>
-                <p>{{experience['start_date']}} - {{experience['end_date']}}</p>
-            </div>
-            {% for responsibilities in experience['description'].split('\n') %}
-            <ul>
-                <li style="font-size: 16px;padding: 0;">{{responsibilities}}</li>
-            </ul>
-            {% endfor %}
-            <h1>{{experience['location']}}</h1>
-        </div>
-        {% endfor%}
+        <ul>
+            {% for experience in work_experience %}
+            <li>
+                <div style="padding-right: 48px;">
+                    <div style="display: flex;">
+                        <h3 style="font-weight: bold;">{{experience['company']}}</h3>
+                        <p style="margin-inline-start: 8px;margin-inline-end: 8px;"> as </p>
+                        <h3 style="font-weight: bold;">{{experience['title']}}</h3>
+                        <div
+                            style="display: flex; font-size: 18px; margin-left: auto; margin-top: auto; margin-bottom: auto;">
+                            <p>{{experience['start_date']}} - </p>
+                            {% if experience['end_date'] != "": %}
+                            <div> experience['end_date]</div>
+                            {% else %}
+                            <p style="margin-left: 6px;"> Present</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% for responsibilities in experience['description'].split('\n') %}
+                    <ul>
+                        <li style="font-size: 20px;padding: 0;">{{responsibilities}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </li>
+            {% endfor%}
+        </ul>
     </div>
 </div>

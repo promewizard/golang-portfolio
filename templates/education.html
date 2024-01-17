@@ -1,0 +1,28 @@
+<!-- education.html -->
+<div style="padding-left: 64px; padding-right: 32px; ">
+    <div style="display: flex;">
+        <h2 style="font-weight: bold;">Education</h2>
+        <hr style="border-top: 2px solid #bf3131bf; width: 85%; align-items: center; margin: auto;;">
+    </div>
+    <ul>
+        {% for education in education_details %}
+        <li>
+            <div style="padding-right: 48px;">
+                <div style="display: flex;">
+                    <h3 style="font-weight: bold;">{{education.institution}}</h3>
+                    <div
+                        style="display: flex; font-size: 18px; margin-left: auto; margin-top: auto; margin-bottom: auto;">
+                        <p>{{education['start-year']}} - </p>
+                        {% if education['end-year'] != "": %}
+                        <div> education['end-year']</div>
+                        {% else %}
+                        <p style="margin-left: 6px;"> Present</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <p style="font-size: 20px;">{{ education.degree }} in {{ education.major }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
