@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Card, CardHeader } from "./ui/card";
-import { CaseUpper, Link2Icon } from "lucide-react";
+import { Link2Icon } from "lucide-react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Badge } from "./ui/badge";
 
