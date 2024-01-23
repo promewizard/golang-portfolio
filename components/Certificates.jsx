@@ -49,7 +49,7 @@ const Certificates = () => {
         </h2>
         {/* slider */}
         <Swiper
-          className='h-[320px]'
+          className='h-[280px]'
           slidesPerView={1}
           breakpoints={{
             640: { slidesPerView: 2 },
