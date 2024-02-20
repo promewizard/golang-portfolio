@@ -14,9 +14,9 @@ func main() {
 	configs.ConnectDB()
 
 	//routes
-	routes.UserRoute(app)
 	routes.CertificateRoute(app)
 	routes.ExperienceRoute(app)
+	routes.ProjectRoute(app)
 
 	app.Listen(":6000")
 }

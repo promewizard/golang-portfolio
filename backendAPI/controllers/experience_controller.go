@@ -24,12 +24,12 @@ func CreateExperience(c *fiber.Ctx) error {
 
 	//validate the request body
 	if err := c.BodyParser(&experience); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//use the validator library to validate required fields
 	if validationErr := validate.Struct(&experience); validationErr != nil {
-		return c.Status(http.StatusBadRequest).JSON(responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": validationErr.Error()}})
+		return c.Status(http.StatusBadRequest).JSON(responses.Response{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
 	newExperience := models.Experience{
@@ -41,10 +41,10 @@ func CreateExperience(c *fiber.Ctx) error {
 
 	result, err := experienceCollection.InsertOne(ctx, newExperience)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
-	return c.Status(http.StatusCreated).JSON(responses.UserResponse{Status: http.StatusCreated, Message: "success", Data: &fiber.Map{"data": result}})
+	return c.Status(http.StatusCreated).JSON(responses.Response{Status: http.StatusCreated, Message: "success", Data: &fiber.Map{"data": result}})
 }
 
 func DeleteAExperience(c *fiber.Ctx) error {
@@ -56,17 +56,17 @@ func DeleteAExperience(c *fiber.Ctx) error {
 
 	result, err := experienceCollection.DeleteOne(ctx, bson.M{"id": objId})
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	if result.DeletedCount < 1 {
 		return c.Status(http.StatusNotFound).JSON(
-			responses.UserResponse{Status: http.StatusNotFound, Message: "error", Data: &fiber.Map{"data": "Experience with specified ID not found!"}},
+			responses.Response{Status: http.StatusNotFound, Message: "error", Data: &fiber.Map{"data": "Experience with specified ID not found!"}},
 		)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.UserResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": "Experience successfully deleted!"}},
+		responses.Response{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": "Experience successfully deleted!"}},
 	)
 }
 
@@ -78,7 +78,7 @@ func GetAllExperience(c *fiber.Ctx) error {
 	results, err := experienceCollection.Find(ctx, bson.M{})
 
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//reading from the db in an optimal way
@@ -86,13 +86,13 @@ func GetAllExperience(c *fiber.Ctx) error {
 	for results.Next(ctx) {
 		var singleExperience models.Experience
 		if err = results.Decode(&singleExperience); err != nil {
-			return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+			return c.Status(http.StatusInternalServerError).JSON(responses.Response{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 		}
 
 		experiences = append(experiences, singleExperience)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.UserResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": experiences}},
+		responses.Response{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": experiences}},
 	)
 }

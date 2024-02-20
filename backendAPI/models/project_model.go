@@ -8,4 +8,5 @@ type Project struct {
 	Description string             `json:"description,omitempty" validate:"required"`
 	GitHub      string             `json:"github,omitempty" validate:"required"`
 	Category    string             `json:"category,omitempty" validate:"required"`
+	Image       string             `json:"image,omitempty" validate:"required"`
 }
