@@ -16,6 +16,7 @@ func main() {
 	//routes
 	routes.UserRoute(app)
 	routes.CertificateRoute(app)
+	routes.ExperienceRoute(app)
 
-	app.Listen(":6001")
+	app.Listen(":6000")
 }

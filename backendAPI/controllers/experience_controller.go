@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -16,32 +15,31 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-var certCollection *mongo.Collection = configs.GetCollection(configs.DB, "certificates")
-var validate = validator.New()
+var experienceCollection *mongo.Collection = configs.GetCollection(configs.DB, "experience")
 
-func CreateCert(c *fiber.Ctx) error {
+func CreateExperience(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	var cert models.Certificate
+	var experience models.Experience
 	defer cancel()
 
 	//validate the request body
-	if err := c.BodyParser(&cert); err != nil {
+	if err := c.BodyParser(&experience); err != nil {
 		return c.Status(http.StatusBadRequest).JSON(responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	//use the validator library to validate required fields
-	if validationErr := validate.Struct(&cert); validationErr != nil {
+	if validationErr := validate.Struct(&experience); validationErr != nil {
 		return c.Status(http.StatusBadRequest).JSON(responses.UserResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": validationErr.Error()}})
 	}
 
-	newCert := models.Certificate{
-		Id:     primitive.NewObjectID(),
-		Title:  cert.Title,
-		Issuer: cert.Issuer,
-		Link:   cert.Link,
+	newExperience := models.Experience{
+		Id:       primitive.NewObjectID(),
+		Company:  experience.Company,
+		Role:     experience.Role,
+		Duration: experience.Duration,
 	}
 
-	result, err := certCollection.InsertOne(ctx, newCert)
+	result, err := experienceCollection.InsertOne(ctx, newExperience)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
@@ -49,35 +47,35 @@ func CreateCert(c *fiber.Ctx) error {
 	return c.Status(http.StatusCreated).JSON(responses.UserResponse{Status: http.StatusCreated, Message: "success", Data: &fiber.Map{"data": result}})
 }
 
-func DeleteACert(c *fiber.Ctx) error {
+func DeleteAExperience(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	certId := c.Params("certId")
+	experienceId := c.Params("ExperienceId")
 	defer cancel()
 
-	objId, _ := primitive.ObjectIDFromHex(certId)
+	objId, _ := primitive.ObjectIDFromHex(experienceId)
 
-	result, err := certCollection.DeleteOne(ctx, bson.M{"id": objId})
+	result, err := experienceCollection.DeleteOne(ctx, bson.M{"id": objId})
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	if result.DeletedCount < 1 {
 		return c.Status(http.StatusNotFound).JSON(
-			responses.UserResponse{Status: http.StatusNotFound, Message: "error", Data: &fiber.Map{"data": "Certificate with specified ID not found!"}},
+			responses.UserResponse{Status: http.StatusNotFound, Message: "error", Data: &fiber.Map{"data": "Experience with specified ID not found!"}},
 		)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.UserResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": "Certificate successfully deleted!"}},
+		responses.UserResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": "Experience successfully deleted!"}},
 	)
 }
 
-func GetAllCerts(c *fiber.Ctx) error {
+func GetAllExperience(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	var certs []models.Certificate
+	var experiences []models.Experience
 	defer cancel()
 
-	results, err := certCollection.Find(ctx, bson.M{})
+	results, err := experienceCollection.Find(ctx, bson.M{})
 
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
@@ -86,15 +84,15 @@ func GetAllCerts(c *fiber.Ctx) error {
 	//reading from the db in an optimal way
 	defer results.Close(ctx)
 	for results.Next(ctx) {
-		var singleCert models.Certificate
-		if err = results.Decode(&singleCert); err != nil {
+		var singleExperience models.Experience
+		if err = results.Decode(&singleExperience); err != nil {
 			return c.Status(http.StatusInternalServerError).JSON(responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 		}
 
-		certs = append(certs, singleCert)
+		experiences = append(experiences, singleExperience)
 	}
 
 	return c.Status(http.StatusOK).JSON(
-		responses.UserResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": certs}},
+		responses.UserResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": experiences}},
 	)
 }
