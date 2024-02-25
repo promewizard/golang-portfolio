@@ -1,5 +1,7 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import 'swiper/css';
 import Link from "next/link";
 import { Link2Icon } from "lucide-react";
@@ -41,6 +43,20 @@ const certs = [
 ]
 
 const Certificates = () => {
+
+  const [certs, setCerts] = useState([]);
+
+  console.log(certs)
+
+  useEffect(() => {
+    async function fetchCerts() {
+      const res = await fetch("http://localhost:3001/certs")
+      const data = await res.json()
+      setCerts(data.data.data)
+    }
+    fetchCerts()
+  }, [])
+
   return (
     <section>
       <div className="container mx-auto">
@@ -69,13 +85,13 @@ const Certificates = () => {
                       {/* Image */}
                       <Link 
                         href={cert.link}>
-                      <Image
+                      {/* <Image
                         src={cert.image}
                         alt={cert.title}
                         width={200}
                         height={200}
                         priority
-                      />
+                      /> */}
                       </Link>
                       {/* text */}
                       <div className="flex flex-col">

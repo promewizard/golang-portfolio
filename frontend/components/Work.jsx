@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useEffect, useState } from 'react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -93,6 +94,20 @@ const projectData = [
 ]
 
 const Work = () => {
+
+  // const [projects, setProjects] = useState([]);
+
+  // // console.log(projects)
+
+  // useEffect(() => {
+  //   async function fetchProjects() {
+  //     const res = await fetch("http://localhost:3001/certs")
+  //     const data = await res.json()
+  //     setProjects(data)
+  //   }
+  //   fetchProjects()
+  // }, [])
+
   return <section className='relative mb-12 xl:mb-48'>
     <div className='container mx-auto'>
       {/* text */}
@@ -106,7 +121,7 @@ const Work = () => {
         </Link>
       </div>
       {/* slider */}
-      <div className='xl:max-w-[1000px] xl:absolute right-32 top-0'>
+      <div className='xl:max-w-[1000px] xl:absolute right-24 top-0'>
         <Swiper className='h-[480px]' slidesPerView={1} breakpoints={{
           640: {
             slidesPerView: 2
