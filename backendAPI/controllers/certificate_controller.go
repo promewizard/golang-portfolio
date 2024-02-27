@@ -39,6 +39,7 @@ func CreateCert(c *fiber.Ctx) error {
 		Title:  cert.Title,
 		Issuer: cert.Issuer,
 		Link:   cert.Link,
+		Image:  cert.Image,
 	}
 
 	result, err := certCollection.InsertOne(ctx, newCert)

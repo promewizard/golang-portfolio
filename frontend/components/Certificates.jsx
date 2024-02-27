@@ -5,42 +5,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import Link from "next/link";
 import { Link2Icon } from "lucide-react";
+import { Button } from './ui/button';
 import 'swiper/css/pagination';
 import { Pagination } from "swiper/modules";
-// import CertCard from "./CertCard";
 import { Card, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
-
-const certs = [
-  {
-    title: 'Associate Cloud Engineer',
-    issuer: 'Google Cloud Platform',
-    image: '/certs/ace.png',
-    link: 'https://www.credential.net/6212d151-3ceb-4a15-892e-e4e4d29f65c7',
-    duration: '21st Sept. 2022 - 21st Sept. 2025'
-  },
-  {
-    title: 'AWS Academy Cloud Foundations',
-    issuer: 'AWS Academy',
-    image: '/certs/aws-foundations.png',
-    link: 'https://www.credly.com/go/yNEuSTPd',
-    duration: 'March 2023'
-  },
-  {
-    title: 'Professional Cloud Engineer',
-    issuer: 'Google Cloud Platform',
-    image: '/certs/ace.png',
-    link: 'https://www.credential.net/6212d151-3ceb-4a15-892e-e4e4d29f65c7',
-    duration: '21st Sept. 2022 - 21st Sept. 2025'
-  },
-  {
-    title: 'AWS Academy Cloud Foundations',
-    issuer: 'AWS Academy',
-    image: '/certs/aws-foundations.png',
-    link: 'https://www.credly.com/go/yNEuSTPd',
-    duration: 'March 2023'
-  },
-]
 
 const Certificates = () => {
 
@@ -85,27 +54,21 @@ const Certificates = () => {
                       {/* Image */}
                       <Link 
                         href={cert.link}>
-                      {/* <Image
-                        src={cert.image}
-                        alt={cert.title}
-                        width={200}
-                        height={200}
-                        priority
-                      /> */}
+                      { 
+                        <Image
+                          src={cert.image}
+                          alt={cert.title}
+                          width={200}
+                          height={200}
+                          priority
+                        /> 
+                      }
                       </Link>
                       {/* text */}
                       <div className="flex flex-col">
                         <CardTitle>{cert.title}</CardTitle>
                         <p>{cert.issuer}</p>
                       </div>
-                      {/* btn */}
-                      {/* <div className="flex gap-x-4">
-                        <Link
-                          href={cert.link}
-                          className="bg-secondary w-[54px] h-[54px] rounded-full flex justify-center items-center scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200">
-                          <Link2Icon className="text-white" />
-                        </Link>
-                      </div> */}
                     </div>
                   </CardHeader>
                 </Card>
@@ -114,6 +77,11 @@ const Certificates = () => {
           })}
         </Swiper>
       </div>
+      {/* <div className='mx-auto xl:mx-0 text-center xl:text-left mb-4 flex flex-col justify-center items-center xl:items-start'>
+        <Link href='/projects'>
+          <Button>All Certificates</Button>
+        </Link>
+      </div> */}
     </section>
   );
 };

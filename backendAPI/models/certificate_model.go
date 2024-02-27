@@ -7,4 +7,5 @@ type Certificate struct {
 	Title  string             `json:"title,omitempty" validate:"required"`
 	Issuer string             `json:"issuer,omitempty" validate:"required"`
 	Link   string             `json:"link,omitempty" validate:"required"`
+	Image  string             `json:"image,omitempty" validate:"required"`
 }
