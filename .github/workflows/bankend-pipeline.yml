@@ -10,6 +10,9 @@ jobs:
   compile-and-test:
     name: Compile and test application
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backendAPI
 
     steps:
       - name: Check out code
@@ -19,9 +22,6 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
-
-      - name: Navigate to the backendAPI directory
-        run: cd backendAPI/ && ls
       
       - name: Install dependencies
         run: ls
