@@ -30,4 +30,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check gcloud
-        run: gcloud version
+        run: gcloud ls
