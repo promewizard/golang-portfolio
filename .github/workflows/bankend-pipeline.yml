@@ -2,6 +2,9 @@ name: Pylint
 
 on: 
   push:
+  
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 jobs:
   setup:
@@ -20,7 +23,7 @@ jobs:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
 
     - name: check gcloud
-      run: gsutil ls --project ${{ secrets.GCP_PROJECT_ID }}
+      run: gsutil ls
   
   compile:
     name: Compile Application
@@ -32,5 +35,5 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Check gcloud
-        run: gsutil ls
+      # - name: Check gcloud
+      #   run: gsutil ls
