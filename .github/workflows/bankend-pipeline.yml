@@ -61,7 +61,6 @@ jobs:
           format: sarif
           gh-code-scanning-compact: true
           max-allowed-issues: 30
-          directory: ./backendAPI
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@main
