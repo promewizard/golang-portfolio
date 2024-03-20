@@ -1,6 +1,6 @@
 module backendAPI
 
-go 1.21.6
+go 1.23
 
 require go.mongodb.org/mongo-driver v1.13.1
 
