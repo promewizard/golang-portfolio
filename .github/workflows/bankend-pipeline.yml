@@ -18,6 +18,9 @@ jobs:
       uses: google-github-actions/auth@v2
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: check gcloud
+      run: gsutil ls --project ${{ secrets.GCP_PROJECT_ID }}
   
   compile:
     name: Compile Application
