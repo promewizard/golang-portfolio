@@ -7,36 +7,39 @@ env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 jobs:
-  setup:
-    name: Setup Go and gcloud
+  compile-and-test:
+    name: Compile and test application
     runs-on: ubuntu-latest
 
     steps:
-    - name: Setup Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.16
-
-    - name: Authenticate to Google Cloud
-      uses: google-github-actions/auth@v0
-      with:
-        credentials_json: ${{ secrets.GCP_SA_KEY }}
-
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v0
-
-    - name: check gcloud
-      run: gcloud auth list
-  
-  compile:
-    name: Compile Application
-    runs-on: ubuntu-latest
-    needs: setup
-
-    steps:
-
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: check gcloud
-        run: gcloud auth list
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      
+      - name: Install dependencies
+        run: go mod download
+      
+      # - name: Run tests
+      #   run: go test -v ./...
+
+  file-system-scan:
+    name: File System Scan
+    runs-on: ubuntu-latest
+    needs: compile-and-test
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Trivy Root file system scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: rootfs
+          ignore-unfixed: true
+          format: table
+          output: result.txt
+          severity: CRITICAL
