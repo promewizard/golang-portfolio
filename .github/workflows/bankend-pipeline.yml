@@ -23,7 +23,7 @@ jobs:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
 
     - name: check gcloud
-      run: gsutil ls
+      run: gcloud auth list
   
   compile:
     name: Compile Application
@@ -35,5 +35,5 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Check gcloud
-        run: gsutil ls
+      - name: check gcloud
+        run: gcloud auth list
