@@ -22,6 +22,8 @@ jobs:
   compile:
     name: Compile Application
     runs-on: ubuntu-latest
+    depends-on: setup
+
     steps:
 
       - name: Check out code
