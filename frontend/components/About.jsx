@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsTrigger, TabsList } from '@/components/ui/tabs';
 
 import { User2, MailIcon, HomeIcon, PhoneCall, GraduationCap, Calendar, Briefcase } from "lucide-react";
 
+// Contact Info
 const infoData = [
   {
     icon: <User2 size={28} />,

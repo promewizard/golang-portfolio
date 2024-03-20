@@ -10,103 +10,20 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules'
 import ProjectCard from '@/components/ProjectCard';
 
-const projectData = [
-  {
-    image: '/work/3.png',
-    category: 'react js',
-    name: 'Nexa Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/4.png',
-    category: 'react js',
-    name: 'Solistica Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/2.png',
-    category: 'next js',
-    name: 'Lumina Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/3.png',
-    category: 'next js',
-    name: 'Evolve Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/3.png',
-    category: 'react js',
-    name: 'Nexa Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/3.png',
-    category: 'react js',
-    name: 'Nexa Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/3.png',
-    category: 'react js',
-    name: 'Nexa Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/3.png',
-    category: 'react js',
-    name: 'Nexa Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/3.png',
-    category: 'react js',
-    name: 'Nexa Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-  {
-    image: '/work/3.png',
-    category: 'react js',
-    name: 'Nexa Website',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus.',
-    link: '/',
-    github: '/',
-  },
-]
-
 const Work = () => {
 
-  // const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]);
 
-  // // console.log(projects)
+  console.log(projects)
 
-  // useEffect(() => {
-  //   async function fetchProjects() {
-  //     const res = await fetch("http://localhost:3001/certs")
-  //     const data = await res.json()
-  //     setProjects(data)
-  //   }
-  //   fetchProjects()
-  // }, [])
+  useEffect(() => {
+    async function fetchProjects() {
+      const res = await fetch("http://localhost:3001/projects")
+      const data = await res.json()
+      setProjects(data.data.data)
+    }
+    fetchProjects()
+  }, [])
 
   return <section className='relative mb-12 xl:mb-48'>
     <div className='container mx-auto'>
@@ -132,7 +49,7 @@ const Work = () => {
           pagination={{ clickable: true }}
         >
           {/* show only first 2 projects */}
-          {projectData.slice(0, 3).map((project, index) => {
+          {projects.slice(0, 3).map((project, index) => {
             return <SwiperSlide key={index}>
               <ProjectCard project={project} />
             </SwiperSlide>;
