@@ -21,10 +21,10 @@ jobs:
           go-version: 1.16
 
       - name: Navigate to the backendAPI directory
-        run: cd backendAPI/
+        run: cd backendAPI/ && ls
       
-      - name: Install dependencies
-        run: go mod download
+      # - name: Install dependencies
+      #   run: go mod download
       
       # - name: Run tests
       #   run: go test -v ./...
