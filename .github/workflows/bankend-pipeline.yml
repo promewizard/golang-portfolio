@@ -46,6 +46,4 @@ jobs:
         with:
           scan-type: 'fs'
           scan-ref: '.'
-          format: table
-          output: result.txt
           severity: CRITICAL
