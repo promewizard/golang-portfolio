@@ -41,11 +41,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Trivy Root file system scan
+      - name: Trivy file system scan
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: rootfs
-          ignore-unfixed: true
+          scan-type: 'fs'
+          scan-ref: '.'
           format: table
           output: result.txt
           severity: CRITICAL
