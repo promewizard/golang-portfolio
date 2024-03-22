@@ -146,7 +146,7 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-        
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -159,11 +159,8 @@ jobs:
 
       - name: Update Cloud Run Config file
         run : |-
-          ls -al
-
-
-        # sed -i "s|<IMAGE>|${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}|g" ./cloud-run-config.yaml
-        # cat ./cloud-run-config.yaml
+          sed -i "s|<IMAGE>|${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}|g" ./cloud-run-config.yaml
+          cat ./cloud-run-config.yaml
 
       # - name: Deploy to Cloud Run
       #   uses: google-github-actions/deploy-cloudrun@v2
