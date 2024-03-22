@@ -108,8 +108,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          pwd
-          ls -la
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/backend-api:${{ github.sha }} .
 
       - name: Run Trivy container image scan
         uses: aquasecurity/trivy-action@master
