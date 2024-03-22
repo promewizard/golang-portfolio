@@ -122,7 +122,7 @@ jobs:
       - name: Run Trivy container image scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api
+          image-ref: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
           format: sarif
           output: trivy-image-report.sarif
   
