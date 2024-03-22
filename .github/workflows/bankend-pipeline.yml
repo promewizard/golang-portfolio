@@ -56,10 +56,8 @@ jobs:
       - name: Run Codacy Analysis
         uses: codacy/codacy-analysis-cli-action@master
         with:
-          verbose: true
           output: results.sarif
           format: sarif
-          gh-code-scanning-compact: true
           max-allowed-issues: 2147483647
 
       - name: Upload SARIF file
