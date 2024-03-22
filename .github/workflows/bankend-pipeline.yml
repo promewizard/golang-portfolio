@@ -63,6 +63,11 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
+      - name: Build Go Application for COdeQL
+        run: |
+          go build -o go-app
+          mv go-app go-app-$GITHUB_SHA
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
