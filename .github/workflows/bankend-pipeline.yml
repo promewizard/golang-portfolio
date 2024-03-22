@@ -119,25 +119,25 @@ jobs:
         run: |-
           docker images
 
-  #     - name: Run Trivy container image scan
-  #       uses: aquasecurity/trivy-action@master
-  #       with:
-  #         image-ref: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api/:${{ github.sha }}
-  #         format: sarif
-  #         output: trivy-image-report.sarif
+      - name: Run Trivy container image scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api
+          format: sarif
+          output: trivy-image-report.sarif
   
-  #     - name: Upload Trivy container image scan result
-  #       uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: trivy-image-report.sarif
+      - name: Upload Trivy container image scan result
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-image-report.sarif
 
-  #     - name: Docker Auth
-  #       run: |-
-  #         gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
+      - name: Docker Auth
+        run: |-
+          gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
 
-  #     - name: Push Docker image
-  #       run: |
-  #         docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
 
   # deploy:
   #   name: Deploy application to Cloud Run
