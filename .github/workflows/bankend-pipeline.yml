@@ -30,17 +30,22 @@ jobs:
       #   run: go test -v ./...
 
   file-system-scan:
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
-
     name: File System Scan
     runs-on: ubuntu-latest
     needs: compile-and-test
     defaults:
       run:
         working-directory: ./backendAPI
+
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'go' ]
 
     steps:
       - name: Check out code
@@ -52,16 +57,17 @@ jobs:
           scan-type: 'fs'
           scan-ref: '.'
           severity: CRITICAL
-      
-      - name: Run Codacy Analysis
-        uses: codacy/codacy-analysis-cli-action@master
+    
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
         with:
-          output: results.sarif
-          format: sarif
-          max-allowed-issues: 2147483647
+          languages: ${{ matrix.language }}
 
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@main
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
         with:
-          sarif_file: results.sarif
+          category: "/languages:${{matrix.language}}"
           
