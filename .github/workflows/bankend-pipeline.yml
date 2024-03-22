@@ -151,13 +151,18 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Update Cloud Run Config file
+        run : |-
+          sed -i "s|<IMAGE>|${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}|g" ./cloud-run-config.yaml
+          cat ./cloud-run-config.yaml
+          
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: backend-api
-          image: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
-          secrets: |
-            MONGOURI=MONGOURI:latest
+          metadata: ./cloud-run-config.yaml
+          # image: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
+          # secrets: |
+          #   MONGOURI=MONGOURI:latest
 
       - name: Print service URL
         run: echo ${{ steps.deploy.outputs.url }}

@@ -22,5 +22,5 @@ func main() {
 	routes.ExperienceRoute(app)
 	routes.ProjectRoute(app)
 
-	app.Listen(":3001")
+	app.Listen(":3000")
 }
