@@ -157,7 +157,7 @@ jobs:
           service: backend-api
           image: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
           secrets: |
-            MONGOURI=${{ secrets.MONGOURI }}
+            MONGOURI=MONGOURI:latest
 
       - name: Print service URL
         run: echo ${{ steps.deploy.outputs.url }}
