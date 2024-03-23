@@ -163,7 +163,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |-
-          ls -la
+          cat cloud-run-config.yaml
         # uses: google-github-actions/deploy-cloudrun@v2
         # with:
         #   metadata: ./cloud-run-config.yaml
