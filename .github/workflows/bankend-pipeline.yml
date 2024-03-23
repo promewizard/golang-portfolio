@@ -162,14 +162,12 @@ jobs:
           sed -i "s|<IMAGE>|${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}|g" ./cloud-run-config.yaml
 
       - name: Deploy to Cloud Run
-        run: |-
-          cat cloud-run-config.yaml
-        # uses: google-github-actions/deploy-cloudrun@v2
-        # with:
-        #   metadata: ./cloud-run-config.yaml
-        #   # image: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
-        #   # secrets: |
-        #   #   MONGOURI=MONGOURI:latest
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          metadata: cloud-run-config.yaml
+          # image: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}
+          # secrets: |
+          #   MONGOURI=MONGOURI:latest
 
       - name: Print service URL
         run: echo ${{ steps.deploy.outputs.url }}
