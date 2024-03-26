@@ -163,7 +163,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |-
-          gcloud run deploy backend-api --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }} --platform=managed --region=${{ secrets.GCP_REGION }} --max-instances=2 --port=3000 --set-env-vars=MONGOURI=${{ secrets.MONGOURI }} --no-allow-unauthenticated --quiet
+          gcloud run deploy backend-api --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }} --platform=managed --allow-unauthenticated --region=${{ secrets.GCP_REGION }} --cpu=2 --memory=1024Mi --max-instances=2 --port=3000 --set-secrets=MONGOURI=MONGOURI:1
 
       - name: Print service URL
-        run: echo ${ gcloud }
+        run: gcloud run services describe backend-api --region=${{ secrets.GCP_REGION }} --format='value(status.url)'
