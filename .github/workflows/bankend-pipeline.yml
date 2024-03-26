@@ -7,87 +7,87 @@ env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 jobs:
-  # compile-and-test:
-  #   name: Compile and test application
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: ./backendAPI
+  compile-and-test:
+    name: Compile and test application
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backendAPI
 
-  #   steps:
-  #     - name: Check out code
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
 
-  #     - name: Setup Go
-  #       uses: actions/setup-go@v5
-  #       with:
-  #         go-version: '>=1.17.0'
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.17.0'
       
-  #     - name: Install dependencies
-  #       run: go mod download
+      - name: Install dependencies
+        run: go mod download
       
-      # - name: Run tests
-      #   run: go test -v ./...
+      - name: Run tests
+        run: go test -v ./...
 
-  # file-system-scan:
-  #   name: File System Scan
-  #   runs-on: ubuntu-latest
-  #   needs: compile-and-test
-  #   defaults:
-  #     run:
-  #       working-directory: ./backendAPI
+  file-system-scan:
+    name: File System Scan
+    runs-on: ubuntu-latest
+    needs: compile-and-test
+    defaults:
+      run:
+        working-directory: ./backendAPI
 
-  #   permissions:
-  #     contents: read
-  #     security-events: write
-  #     actions: read
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
 
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       language: [ 'go' ]
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'go' ]
 
-  #   steps:
-  #     - name: Check out code
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
 
-  #     - name: Setup Go for Auto Build
-  #       uses: actions/setup-go@v5
-  #       with:
-  #         go-version: '>=1.17.0'
+      - name: Setup Go for Auto Build
+        uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.17.0'
 
-  #     - name: Run Trivy file system scan
-  #       uses: aquasecurity/trivy-action@master
-  #       with:
-  #         scan-type: 'fs'
-  #         scan-ref: '.'
-  #         severity: CRITICAL
-  #         ignore-unfixed: true
-  #         format: sarif
-  #         output: trivy-filesystem-report.sarif
+      - name: Run Trivy file system scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: CRITICAL
+          ignore-unfixed: true
+          format: sarif
+          output: trivy-filesystem-report.sarif
 
-  #     - name: Upload Trivy file system scan result
-  #       uses: github/codeql-action/upload-sarif@v3
-  #       with:
-  #         sarif_file: trivy-filesystem-report.sarif
+      - name: Upload Trivy file system scan result
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-filesystem-report.sarif
     
-  #     - name: Initialize CodeQL
-  #       uses: github/codeql-action/init@v3
-  #       with:
-  #         languages: ${{ matrix.language }}
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
 
-  #     - name: Autobuild
-  #       uses: github/codeql-action/autobuild@v3
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
 
-  #     - name: Perform CodeQL Analysis
-  #       uses: github/codeql-action/analyze@v3
-  #       with:
-  #         category: "/languages:${{matrix.language}}"
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/languages:${{matrix.language}}"
           
   containerize:
     name: Containerize application
     runs-on: ubuntu-latest
-    # needs: file-system-scan
+    needs: file-system-scan
     defaults:
       run:
         working-directory: ./backendAPI
