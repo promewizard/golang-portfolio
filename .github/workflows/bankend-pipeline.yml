@@ -157,13 +157,9 @@ jobs:
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Update Cloud Run Config file
-        run : |-
-          sed -i "s|<IMAGE>|${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }}|g" ./cloud-run-config.yaml
-
       - name: Deploy to Cloud Run
         run: |-
-          gcloud run deploy backend-api --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }} --platform=managed --allow-unauthenticated --region=${{ secrets.GCP_REGION }} --cpu=2 --memory=1024Mi --max-instances=2 --port=3000 --set-secrets=MONGOURI=MONGOURI:1
+          gcloud run deploy backend-api --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/portfolio/backend-api:${{ github.sha }} --platform=managed --allow-unauthenticated --region=${{ secrets.GCP_REGION }} --cpu=2 --memory=128Mi --max-instances=.25 --port=3000 --set-secrets=MONGOURI=MONGOURI:1
 
       - name: Print service URL
         run: gcloud run services describe backend-api --region=${{ secrets.GCP_REGION }} --format='value(status.url)'
