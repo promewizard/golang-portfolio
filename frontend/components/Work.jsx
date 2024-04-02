@@ -18,7 +18,7 @@ const Work = () => {
 
   useEffect(() => {
     async function fetchProjects() {
-      const res = await fetch("http://localhost:3001/projects")
+      const res = await fetch("https://backend-api-7znngxavwq-uc.a.run.app/projects")
       const data = await res.json()
       setProjects(data.data.data)
     }

@@ -2,6 +2,8 @@ name: Backend API CI/CD
 
 on: 
   push:
+    paths:
+      - backendAPI/**
   
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}

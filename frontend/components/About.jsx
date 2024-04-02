@@ -178,10 +178,10 @@ const About = () => {
                 <TabsContent value="personal">
                   <div className="text-center xl:text-left">
                     <h3 className="h3 mb-4">
-                      Unmatched service quality for over 10 years
+                    Aspiring DevOps Engineer
                     </h3>
                     <p className="subtitle max-w-xl mx-auto xl:mx-0">
-                      I specialize in crafting intutive website with cutting-edge Technology, delivering dynamic and engaging user experiences.
+                    Passionate about crafting scalable infrastructure using DevOps tools for seamless deployment and management.
                     </p>
                     {/* icons */}
                     <div className="grid xl:grid-cols-2 gap-4 mb-12">

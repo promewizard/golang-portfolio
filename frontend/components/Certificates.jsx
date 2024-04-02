@@ -19,7 +19,7 @@ const Certificates = () => {
 
   useEffect(() => {
     async function fetchCerts() {
-      const res = await fetch("http://localhost:3001/certs")
+      const res = await fetch("https://backend-api-7znngxavwq-uc.a.run.app/certs")
       const data = await res.json()
       setCerts(data.data.data)
     }

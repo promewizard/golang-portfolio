@@ -22,10 +22,6 @@ const icons = [
     path: '/',
     name: <RiTwitterFill />,
   },
-  {
-    path: '/',
-    name: <RiInstagramFill />,
-  },
 ]
 
 const Socials = ({containerStyles, iconStyles}) => {
