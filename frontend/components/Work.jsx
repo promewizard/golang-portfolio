@@ -80,10 +80,7 @@ const Work = () => {
                         {projects.slice(0, 3).map((project, index) => {
                             return (
                                 <SwiperSlide key={index}>
-                                    <ProjectCard
-                                        project={project}
-                                        className={"min-h-[620px]"}
-                                    />
+                                    <ProjectCard project={project} />
                                 </SwiperSlide>
                             );
                         })}

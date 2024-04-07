@@ -36,7 +36,10 @@ const Projects = () => {
                         {projects.map((project, index) => {
                             return (
                                 <TabsContent>
-                                    <ProjectCard project={project} />
+                                    <ProjectCard
+                                        project={project}
+                                        className={"min-h-[620px]"}
+                                    />
                                 </TabsContent>
                             );
                         })}
