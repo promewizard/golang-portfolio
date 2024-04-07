@@ -5,6 +5,7 @@ import { Card, CardHeader } from "./ui/card";
 import { Link2Icon } from "lucide-react";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { Badge } from "./ui/badge";
+import styles from "./ProjectCard.module.css";
 
 const ProjectCard = ({ project, className, ...props }) => {
     return (
@@ -41,9 +42,14 @@ const ProjectCard = ({ project, className, ...props }) => {
                     {project.category}
                 </Badge>
                 <h4 className="mb-1 h4">{project.name}</h4>
-                <p className="text-lg truncate text-muted-foreground">
+                <div
+                    className={cn(
+                        "h-full text-lg text-muted-foreground",
+                        className ? styles.multiLineOverflow : "truncate"
+                    )}
+                >
                     {project.description}
-                </p>
+                </div>
             </div>
         </Card>
     );

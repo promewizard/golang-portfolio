@@ -1,0 +1,14 @@
+.multiLineOverflow {
+    position: relative;
+    overflow: hidden;
+    max-height: 230px;
+    padding-right: 1em; /* Makes room for the ellipsis */
+}
+
+.multiLineOverflow::after {
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+}
