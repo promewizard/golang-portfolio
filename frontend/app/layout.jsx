@@ -11,20 +11,20 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const cairoPlay = Cairo_Play({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Nischay - Portfolio",
-  description: "Professional Portfolio of Nischay",
+    title: "@Kri.sato - Portfolio",
+    description: "Golang Portfolio of Kri.sato",
 };
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cairoPlay.className}>
-        <ThemeProvider attributeName="class" defaultTheme="light">
-          <Header />
-          {children}
-          <Footer />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body className={cairoPlay.className}>
+                <ThemeProvider attributeName="class" defaultTheme="light">
+                    <Header />
+                    {children}
+                    <Footer />
+                </ThemeProvider>
+            </body>
+        </html>
+    );
 }

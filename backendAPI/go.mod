@@ -2,15 +2,17 @@ module backendAPI
 
 go 1.22.1
 
-require go.mongodb.org/mongo-driver v1.13.1
+require (
+	github.com/go-playground/validator/v10 v10.17.0
+	github.com/gofiber/fiber/v2 v2.52.0
+	go.mongodb.org/mongo-driver v1.13.1
+)
 
 require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.17.0 // indirect
-	github.com/gofiber/fiber/v2 v2.52.0 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
