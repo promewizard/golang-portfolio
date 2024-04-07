@@ -8,10 +8,13 @@ import (
 )
 
 func EnvMongoURI() string {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	// Attempt to load .env file if it exists, but don't fail if it doesn't
+	_ = godotenv.Load() // Note: Ignoring error on purpose
+
+	mongoURI := os.Getenv("MONGOURI")
+	if mongoURI == "" {
+		log.Fatal("MONGOURI environment variable not set")
 	}
 
-	return os.Getenv("MONGOURI")
+	return mongoURI
 }
