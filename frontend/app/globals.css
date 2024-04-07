@@ -3,88 +3,116 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 19% 16%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 19% 16%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 8 99% 67%;
-    --primary-foreground: 300 0% 100%;
-    --secondary: 240 19% 16%;
-    --secondary-foreground: 300 0% 100%;
-    --tertiary: 27 82% 98%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 237 13% 40%;
-    --accent: 237 9% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 8 82% 92%;
-    --input: 8 82% 92%;
-    --ring: 9 99% 67%;
-    --radius: 0.5rem;
-  }
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 19% 16%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 19% 16%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
+        --primary: 8 99% 67%;
+        --primary-foreground: 300 0% 100%;
+        --secondary: 240 19% 16%;
+        --secondary-foreground: 300 0% 100%;
+        --tertiary: 27 82% 98%;
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 237 13% 40%;
+        --accent: 237 9% 96%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 8 82% 92%;
+        --input: 8 82% 92%;
+        --ring: 9 99% 67%;
+        --radius: 0.5rem;
+    }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-  }
+    .dark {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+        --popover: 222.2 84% 4.9%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 217.2 91.2% 59.8%;
+        --primary-foreground: 222.2 47.4% 11.2%;
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 224.3 76.3% 48%;
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+    * {
+        @apply border-border;
+    }
 
-  body {
-    @apply bg-background text-foreground;
-  }
+    body {
+        @apply bg-background text-foreground;
+    }
 }
 
 .h1 {
-  @apply text-6xl xl:text-[72px] xl:leading-[72px] font-bold tracking-[-2px];
+    @apply text-6xl xl:text-[72px] xl:leading-[72px] font-bold tracking-[-2px];
 }
 
 .h2 {
-  @apply text-4xl font-bold;
+    @apply text-4xl font-bold;
 }
 
 .h3 {
-  @apply text-3xl font-bold;
+    @apply text-3xl font-bold;
 }
 
 .h4 {
-  @apply text-[22px] font-semibold;
+    @apply text-[22px] font-semibold;
 }
 
 .subtitle {
-  @apply text-muted-foreground text-lg mb-8 font-light
+    @apply mb-8 text-lg font-light text-muted-foreground;
 }
 
 .section-title {
-  @apply text-4xl font-bold relative w-max flex items-center justify-between gap-x-3 before:bg-dots_light before:dark:bg-dots_dark before:bg-no-repeat before:bg-center before:w-[24px] before:h-[24px];
+    @apply text-4xl font-bold relative w-max flex items-center justify-between gap-x-3 before:bg-dots_light before:dark:bg-dots_dark before:bg-no-repeat before:bg-center before:w-[24px] before:h-[24px];
 }
 
 /* swipper bullet styles */
-.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-paagination-bullet {
-  @apply bg-primary;
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets
+    .swiper-paagination-bullet {
+    @apply bg-primary;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 17px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--secondary);
+    border-radius: 14px;
+    border: 3px solid var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--tertiary);
+}
+
+:root {
+    --primary: #f1f1f1;
+    --secondary: rgba(253, 83, 31, 0.4);
+    --tertiary: rgba(253, 120, 31, 0.6);
 }
