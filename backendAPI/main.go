@@ -21,6 +21,7 @@ func main() {
 	routes.CertificateRoute(app)
 	routes.ExperienceRoute(app)
 	routes.ProjectRoute(app)
-
-	app.Listen(":8000")
+	
+	port := configs.EnvPort()
+	app.Listen(":" + port)
 }

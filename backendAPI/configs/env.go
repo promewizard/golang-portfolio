@@ -18,3 +18,12 @@ func EnvMongoURI() string {
 
 	return mongoURI
 }
+
+func EnvPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
+	return port
+}
+
