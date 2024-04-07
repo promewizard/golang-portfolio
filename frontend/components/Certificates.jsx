@@ -4,14 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import Link from "next/link";
-import { Link2Icon } from "lucide-react";
-import { Button } from "./ui/button";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Card, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
 
-// const ServerUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+const ServerUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const Certificates = () => {
     const [certs, setCerts] = useState([]);

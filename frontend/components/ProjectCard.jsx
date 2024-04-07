@@ -3,7 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Card, CardHeader } from "./ui/card";
 import { Link2Icon } from "lucide-react";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { Badge } from "./ui/badge";
 
 const ProjectCard = ({ project, className, ...props }) => {
@@ -31,7 +31,7 @@ const ProjectCard = ({ project, className, ...props }) => {
                             href={project.github}
                             className="bg-secondary w-[54px] h-[54px] rounded-full flex justify-center items-center scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200"
                         >
-                            <GitHubLogoIcon className="w-[24px] h-[24px] text-white" />
+                            <PaperPlaneIcon className="w-[24px] h-[24px] text-white" />
                         </Link>
                     </div>
                 </div>
